@@ -10,6 +10,7 @@ MAX_CPU_PERCENT=80
 MAX_DISK_PERCENT=89
 MAX_MEMORY_PERCENT=90
 MAX_NETWORK_MEGABIT=99
+NETWORK_INTERFACE_ARGUMENT_ERROR_MESSAGE="You should write intended Network Interface"
 def define_net_interface():
     if len(sys.argv)>=2:
        return sys.argv[1]
@@ -19,7 +20,8 @@ def define_net_interface():
        elif psutil.MACOS:
           return "en0"
        else:
-          return "eth0"
+          print(NETWORK_INTERFACE_ARGUMENT_ERROR_MESSAGE)
+          sys.exit(14)
 
 NET_INTERFACE=define_net_interface()       
 BYTES_TO_MEGABITS_DENOMINATOR=1024*1024
