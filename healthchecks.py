@@ -45,6 +45,7 @@ def get_slack_url():
 
 SLACK_WEBHOOKS=get_slack_url()
 def notify_to_slack(error_message="Undefined"):
+    """Send Informations to Slack with Webhooks url with requests library"""
     response = requests.post(SLACK_WEBHOOKS, json = {'text':error_message})
     status_code=response.status_code
     if status_code>199 and status_code<300:
