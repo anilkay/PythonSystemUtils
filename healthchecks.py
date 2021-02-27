@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+System Health Inform to SLACK CHANNEL VİA SLACK WEBHOOKS
+Example Usage:python3 healthchecks.py network_interface |python3 healthchecks.py en0
+cpu,disk,memory and network utilization check   
+"""
 import psutil
 import requests
 import time
