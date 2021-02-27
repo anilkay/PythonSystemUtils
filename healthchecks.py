@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+System Health Inform to SLACK CHANNEL VİA SLACK WEBHOOKS
+Example Usage:python3 healthchecks.py network_interface |python3 healthchecks.py en0
+cpu,disk,memory and network utilization check   
+"""
 import psutil
 import requests
 import time
@@ -12,6 +17,7 @@ MAX_MEMORY_PERCENT=90
 MAX_NETWORK_MEGABIT=99
 NETWORK_INTERFACE_ARGUMENT_ERROR_MESSAGE="You should write intended Network Interface"
 def define_net_interface():
+    """Network Interface Argument assign and/or check."""
     if len(sys.argv)>=2:
        return sys.argv[1]
     else :
@@ -31,6 +37,7 @@ MEMORY_MESSAGE_FORMAT="MEMORY USAGE İS MORE THAN MAX: {}"
 NETWORK_MESSAGE_FORMAT="TOO MUCH NETWORK USAGE: {}"
 
 def get_slack_url():
+    """config.json is mandatory and should have slack_webhook_url value"""
     with open('config.json') as json_file:
          config_json=json.load(json_file)
     slack_url=config_json["slack_webhook_url"]
@@ -38,6 +45,7 @@ def get_slack_url():
 
 SLACK_WEBHOOKS=get_slack_url()
 def notify_to_slack(error_message="Undefined"):
+    """Send Informations to Slack with Webhooks url with requests library"""
     response = requests.post(SLACK_WEBHOOKS, json = {'text':error_message})
     status_code=response.status_code
     if status_code>199 and status_code<300:
