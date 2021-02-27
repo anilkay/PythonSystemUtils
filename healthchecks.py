@@ -17,6 +17,7 @@ MAX_MEMORY_PERCENT=90
 MAX_NETWORK_MEGABIT=99
 NETWORK_INTERFACE_ARGUMENT_ERROR_MESSAGE="You should write intended Network Interface"
 def define_net_interface():
+    """Network Interface Argument assign and/or check."""
     if len(sys.argv)>=2:
        return sys.argv[1]
     else :
@@ -36,6 +37,7 @@ MEMORY_MESSAGE_FORMAT="MEMORY USAGE İS MORE THAN MAX: {}"
 NETWORK_MESSAGE_FORMAT="TOO MUCH NETWORK USAGE: {}"
 
 def get_slack_url():
+    """config.json is mandatory and should have slack_webhook_url value"""
     with open('config.json') as json_file:
          config_json=json.load(json_file)
     slack_url=config_json["slack_webhook_url"]
